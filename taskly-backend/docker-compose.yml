@@ -1,0 +1,22 @@
+services:
+  postgresql:
+    container_name: postgresql_taskly
+    image: postgres:13
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: taskly_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - taskly-net
+    restart: unless-stopped
+
+networks:
+  taskly-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
