@@ -51,7 +51,7 @@ public class ProjectService {
             pageSize = 10;
         }
 
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("createdDate").ascending());
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("createdDate").descending());
         Page<Project> projects = projectRepository.findAllProjects(pageable);
 
         if (projects.isEmpty()) {
@@ -98,7 +98,7 @@ public class ProjectService {
             project.setName(request.name());
         }
 
-        if(request.name() != null) {
+        if(request.description() != null) {
             if (request.description().length() > 500) {
                 throw new IllegalArgumentException("Description must be between 1 and 500 characters!");
             }

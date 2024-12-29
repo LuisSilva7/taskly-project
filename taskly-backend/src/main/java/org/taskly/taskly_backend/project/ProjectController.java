@@ -16,7 +16,7 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<?>> createProject(@Valid ProjectRequest request) {
+    public ResponseEntity<ApiResponse<?>> createProject(@RequestBody @Valid ProjectRequest request) {
         Long projectId = projectService.createProject(request);
 
         return ResponseEntity.ok(new ApiResponse<>(
@@ -46,7 +46,7 @@ public class ProjectController {
     @PutMapping("/{project-id}")
     public ResponseEntity<ApiResponse<ProjectResponse>> updateProject(
             @PathVariable("project-id") Long projectId,
-            ProjectRequest request
+            @RequestBody ProjectRequest request
     ) {
         ProjectResponse response = projectService.updateProject(projectId, request);
 

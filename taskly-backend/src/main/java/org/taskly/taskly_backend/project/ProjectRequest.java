@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public record ProjectRequest (
-        @NotNull(message = "Name cannot be null")
+public record ProjectRequest(
+        @NotBlank(message = "Name cannot be null")
         @Size(min = 1, max = 100, message = "Name must be between 1 and 100 characters")
         String name,
-        @NotNull(message = "Description cannot be null")
+        @NotBlank(message = "Description cannot be null")
         @Size(min = 1, max = 500, message = "Description must be between 1 and 500 characters")
         String description,
         @NotNull(message = "Budget cannot be null")
@@ -23,11 +23,11 @@ public record ProjectRequest (
         @FutureOrPresent(message = "Expected end date must be in the future")
         LocalDate expectedEndDate,
         List<String> attachmentsUrl,
-        @NotNull(message = "Project status cannot be null")
+        @NotBlank(message = "Project status cannot be null")
         String status,
-        @NotNull(message = "Project category cannot be null")
+        @NotBlank(message = "Project category cannot be null")
         String category,
-        @NotNull(message = "Project priority cannot be null")
+        @NotBlank(message = "Project priority cannot be null")
         String priority,
         @NotNull(message = "Project manager cannot be null")
         Long projectManagerId,
