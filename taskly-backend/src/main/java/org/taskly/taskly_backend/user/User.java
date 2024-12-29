@@ -8,7 +8,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.taskly.taskly_backend.project.Project;
 import org.taskly.taskly_backend.role.Role;
+import org.taskly.taskly_backend.task.Task;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -49,9 +51,19 @@ public class User implements UserDetails, Principal {
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
-    //relacao com projetos
+    @OneToMany(mappedBy = "projectManager")
+    private List<Project> managedProjects;
 
-    //relacao com tarefas
+    @ManyToMany(mappedBy = "projectMembers")
+    private List<Project> projects;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_tasks",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private List<Task> userTasks;
 
     //relacao com mensagens
 

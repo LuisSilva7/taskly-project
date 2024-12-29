@@ -19,25 +19,33 @@ import static org.springframework.http.HttpStatus.*;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiResponse<?>> handle(ResourceNotFoundException exp) {
+    public ResponseEntity<ApiResponse<?>> handleException(ResourceNotFoundException exp) {
         ApiResponse<?> apiResponse = new ApiResponse<>(
                 exp.getMessage(), null);
 
         return ResponseEntity.status(NOT_FOUND).body(apiResponse);
     }
 
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<?>> handleException(ResourceAlreadyExistsException ex) {
+        ApiResponse<?> apiResponse = new ApiResponse<>(ex.getMessage(), null);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
+    }
+
     @ExceptionHandler(TokenExpiredException.class)
-    public ResponseEntity<ApiResponse<?>> handle(TokenExpiredException exp) {
+    public ResponseEntity<ApiResponse<?>> handleException(TokenExpiredException exp) {
         ApiResponse<?> apiResponse = new ApiResponse<>(
                 exp.getMessage(), null);
 
         return ResponseEntity.status(BAD_REQUEST).body(apiResponse);
     }
 
-    @ExceptionHandler(ResourceAlreadyExistsException.class)
-    public ResponseEntity<ApiResponse<?>> handleResourceAlreadyExistsException(ResourceAlreadyExistsException ex) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponse<?>> handleException(IllegalArgumentException ex) {
         ApiResponse<?> apiResponse = new ApiResponse<>(ex.getMessage(), null);
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
+
+        return ResponseEntity.status(BAD_REQUEST).body(apiResponse);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
