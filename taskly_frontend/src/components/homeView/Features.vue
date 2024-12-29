@@ -7,6 +7,7 @@
       <li>Detailed reports and analytics</li>
       <li>Facilitated team collaboration</li>
       <li>Real-time chat</li>
+      <li>Share your most used files easily</li>
     </ul>
   </div>
 </template>

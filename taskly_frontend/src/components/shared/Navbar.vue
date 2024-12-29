@@ -1,35 +1,49 @@
 <template>
   <nav>
     <div class="logo">
-      <img src="../../assets/images/logoT.png" alt="Logo" />
-      <span class="logo-text">askly</span>
+      <a href="/" class="logo-link">
+        <img src="../../assets/images/logoT.png" alt="Logo" />
+        <span class="logo-text">askly</span>
+      </a>
     </div>
-    <div class="hamburger" @click="toggleMobileMenu">
-      <div></div>
-      <div></div>
-      <div></div>
+
+    <div v-if="isAuthenticated">
+      <div class="hamburger" @click="toggleMobileMenu">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul :class="['menu', { 'menu-open': isMobileMenuOpen }]">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/tasks">Tasks</a></li>
+        <li><a href="/reports">Reports</a></li>
+        <li class="profile" @click="toggleProfileMenu">
+          <img
+            class="profile-photo"
+            :src="
+              photoUrl || 'http://localhost:8888/uploads/users/user-default.png'
+            "
+            alt="Profile"
+          />
+          <span>{{ username }}</span>
+          <i class="arrow-down"></i>
+          <div v-if="isProfileMenuOpen" class="profile-menu">
+            <ul>
+              <li><a href="/profile">Profile</a></li>
+              <li @click="logout">Logout</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
-    <ul :class="['menu', { 'menu-open': isMobileMenuOpen }]">
-      <li><a href="/">Dashboard</a></li>
-      <li><a href="/projetos">Projetos</a></li>
-      <li><a href="/tarefas">Tarefas</a></li>
-      <li><a href="/relatorios">Relatórios</a></li>
-      <li class="profile" @click="toggleProfileMenu">
-        <img
-          class="profile-photo"
-          src="http://localhost:8888/uploads/users/user-default.png"
-          alt="Profile"
-        />
-        <span>Nome</span>
-        <i class="arrow-down"></i>
-        <div v-if="isProfileMenuOpen" class="profile-menu">
-          <ul>
-            <li><a href="/profile">Perfil</a></li>
-            <li><a href="/logout">Logout</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+
+    <div v-else>
+      <ul class="menu">
+        <li><a href="/register">Get Started</a></li>
+        <li><a href="/login" class="btn-login">Login</a></li>
+      </ul>
+    </div>
   </nav>
 </template>
 
@@ -40,14 +54,45 @@ export default {
     return {
       isProfileMenuOpen: false,
       isMobileMenuOpen: false,
+      isAuthenticated: false,
+      username: "",
+      photoUrl: "",
     };
   },
+  created() {
+    this.checkAuthentication();
+  },
   methods: {
+    checkAuthentication() {
+      const token = localStorage.getItem("auth_token");
+      const tokenExpiration = localStorage.getItem("token_expiration");
+
+      if (token && tokenExpiration && Date.now() < tokenExpiration) {
+        this.isAuthenticated = true;
+        this.username = localStorage.getItem("username");
+        this.photoUrl = localStorage.getItem("photoUrl");
+      } else {
+        this.isAuthenticated = false;
+      }
+    },
+
     toggleProfileMenu() {
       this.isProfileMenuOpen = !this.isProfileMenuOpen;
     },
+
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    },
+
+    logout() {
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("token_expiration");
+      localStorage.removeItem("username");
+      localStorage.removeItem("photoUrl");
+
+      this.$router.push("/");
+
+      this.isAuthenticated = false;
     },
   },
 };
@@ -67,6 +112,13 @@ nav {
 .logo {
   display: flex;
   align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
 }
 
 .logo-text {
@@ -110,10 +162,6 @@ a {
   font-size: 1.2rem;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 .profile {
   position: relative;
   cursor: pointer;
@@ -139,29 +187,61 @@ a:hover {
 
 .profile-menu {
   position: absolute;
-  top: 100%;
+  top: 140%;
   right: 0;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  min-width: 150px;
+  z-index: 10;
   display: block;
 }
 
 .profile-menu ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .profile-menu li {
-  margin: 5px 0;
+  padding: 8px 15px;
+  margin: 0;
+  transition: background-color 0.3s ease;
+}
+
+.profile-menu li:hover {
+  background-color: #f0f0f0;
 }
 
 .profile-menu a {
-  color: rgb(0, 0, 0);
+  color: #333;
   text-decoration: none;
+  display: block;
+  font-size: 1rem;
+  padding: 6px 0;
+  text-align: left;
 }
 
 .profile-menu a:hover {
-  text-decoration: underline;
+  color: #094067;
+  font-weight: 500;
+}
+
+.btn-login {
+  display: inline-block;
+  background-color: #094067;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #094067;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-login:hover {
+  background-color: white;
+  color: black;
 }
 
 @media (max-width: 768px) {

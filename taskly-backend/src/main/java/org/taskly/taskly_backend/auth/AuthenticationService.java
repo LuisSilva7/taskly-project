@@ -49,6 +49,7 @@ public class AuthenticationService {
 
         if(request.photoUrl() == null) {
             // todo - guardar o path para uma foto padrao
+            user.setPhotoUrl("http://localhost:8888/uploads/users/user-default.png");
             // else guardar o path
         }
 
@@ -119,6 +120,6 @@ public class AuthenticationService {
         var user = ((User) auth.getPrincipal());
         claims.put("fullName", user.fullname());
         var jwtToken = jwtService.generateToken(claims, user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, user.getFirstname(), user.getPhotoUrl());
     }
 }

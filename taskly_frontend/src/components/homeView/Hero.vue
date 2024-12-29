@@ -10,9 +10,7 @@
         <button class="btn-primary" @click="redirectToRegister">
           Get Started
         </button>
-        <button class="btn-secondary" @click="redirectToLogin">
-          See a Demo
-        </button>
+        <button class="btn-secondary" @click="redirectToLogin">Login</button>
       </div>
     </div>
   </section>

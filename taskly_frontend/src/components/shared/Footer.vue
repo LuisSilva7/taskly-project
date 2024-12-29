@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>All Rights Reserved. © 2024 Taskly</p>
+    <p>All Rights Reserved. © 2025 Taskly</p>
   </footer>
 </template>
 
