@@ -2,25 +2,26 @@
   <div class="home-container">
     <Navbar />
     <main class="home">
-      <p>
-        Aqui você pode visualizar e gerenciar todos os seus projetos, tarefas e
-        relatórios de forma simples e eficiente.
-      </p>
+      <Hero />
+      <Features />
     </main>
     <Footer />
   </div>
 </template>
 
 <script>
-// Importando a Navbar e o Footer
 import Navbar from "../components/shared/Navbar.vue";
 import Footer from "../components/shared/Footer.vue";
+import Hero from "../components/homeView/Hero.vue";
+import Features from "../components/homeView/Features.vue";
 
 export default {
   name: "Home",
   components: {
     Navbar,
     Footer,
+    Hero,
+    Features,
   },
 };
 </script>
