@@ -25,6 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "users")
 public class User implements UserDetails, Principal {
 
     @Id

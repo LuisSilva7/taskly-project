@@ -1,7 +1,6 @@
 package org.taskly.taskly_backend.auth;
 
 import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDate;
 
@@ -17,7 +16,6 @@ public record RegistrationRequest(
         @NotNull(message = "Job role cannot be null.")
         @Size(min = 2, max = 40, message = "Job role must be between 2 and 50 characters.")
         String jobRole,
-        @URL(message = "Photo URL must be a valid URL.")
         String photoUrl,
         @NotEmpty(message = "Email is mandatory")
         @NotBlank(message = "Email is mandatory")

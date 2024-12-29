@@ -30,21 +30,78 @@ public class AuthenticationService {
             throw new ResourceAlreadyExistsException("Email " + request.email() + " already exists!");
         }
 
-        var userRole = roleRepository.findByName("MANAGER")
-                .orElseThrow(() -> new ResourceNotFoundException("Role with name: MANAGER not found!"));
+        var userRole = roleRepository.findByName("USER")
+                .orElseThrow(() -> new ResourceNotFoundException("Role with name: USER not found!"));
 
         // falta por as relacoes
         var user = User.builder()
                 .firstname(request.firstname())
                 .lastname(request.lastname())
+                .dateOfBirth(request.dateOfBirth())
+                .jobRole(request.jobRole())
+                .photoUrl(request.photoUrl())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .accountLocked(false)
-                .enabled(false)
+                .enabled(true)
                 .roles(List.of(userRole))
                 .build();
+
+        if(request.photoUrl() == null) {
+            // todo - guardar o path para uma foto padrao
+            // else guardar o path
+        }
+
         userRepository.save(user);
     }
+
+    /*public void processPhoto(Long userId, MultipartFile photoFile, String photoUrl) {
+        String photoPath;
+
+        // Define o diretório onde as fotos serão armazenadas
+        String uploadDir = "src/main/resources/static/uploads/users/";
+
+        // Verifica se o diretório existe e cria caso não exista
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        if (photoUrl == null || photoUrl.isEmpty()) {
+            // Foto padrão
+            photoPath = uploadDir + "default.png"; // Nome do arquivo da foto padrão
+            System.out.println("Foto padrão será usada: " + photoPath);
+        } else {
+            try {
+                // Obtém o tipo de arquivo e verifica se é válido
+                String originalFileName = photoFile.getOriginalFilename();
+                String fileExtension = "";
+
+                if (originalFileName != null && originalFileName.contains(".")) {
+                    fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                }
+
+                // Verifica extensões permitidas
+                if (!fileExtension.matches("\\.(png|jpg|jpeg)$")) {
+                    throw new IllegalArgumentException("Formato de arquivo não suportado!");
+                }
+
+                // Cria o nome do arquivo baseado no ID do usuário
+                String fileName = "profile-" + userId + fileExtension;
+
+                // Define o caminho completo do arquivo
+                photoPath = uploadDir + fileName;
+
+                // Salva o arquivo no diretório
+                File targetFile = new File(photoPath);
+                photoFile.transferTo(targetFile);
+
+                System.out.println("Foto salva com sucesso: " + photoPath);
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao salvar a foto: " + e.getMessage(), e);
+            }
+        }
+    }*/
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         if (userRepository.findByEmail(request.email()).isEmpty()) {

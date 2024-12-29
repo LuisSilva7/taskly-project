@@ -17,7 +17,7 @@ public class DataStarter implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        List<String> roles = Arrays.asList("ADMIN", "USER", "MANAGER");
+        List<String> roles = Arrays.asList("ADMIN", "MANAGER", "USER");
 
         for (String roleName : roles) {
             if (!roleRepository.existsByName(roleName)) {
