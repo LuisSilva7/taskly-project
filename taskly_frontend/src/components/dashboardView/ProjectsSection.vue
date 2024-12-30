@@ -104,7 +104,7 @@ export default {
 
 .header {
   display: flex;
-  justify-content: center; /* Centraliza o título */
+  justify-content: center;
   align-items: center;
   margin-bottom: 30px;
 }
@@ -112,7 +112,7 @@ export default {
 h2 {
   font-size: 2rem;
   color: #2c3e50;
-  text-align: center; /* Garante que o título estará centralizado */
+  text-align: center;
 }
 
 ul {

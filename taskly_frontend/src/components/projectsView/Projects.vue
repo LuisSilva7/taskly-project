@@ -1,7 +1,5 @@
 <template>
   <div class="projects-page">
-    <h1 class="page-title">My Projects</h1>
-
     <section class="filters-container">
       <div class="filters">
         <input
@@ -122,8 +120,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      projects: [], // Todos os projetos carregados do backend
-      filteredProjects: [], // Projetos após aplicação dos filtros
+      projects: [],
+      filteredProjects: [],
       filters: {
         name: "",
         status: "",
@@ -156,7 +154,7 @@ export default {
         );
 
         const data = response.data.data;
-        this.projects = data.content; // Armazenar todos os projetos
+        this.projects = data.content;
         this.pageInfo = {
           number: data.number,
           size: data.size,
@@ -166,7 +164,7 @@ export default {
           last: data.last,
         };
 
-        this.applyFilters(); // Aplicar os filtros sempre que os projetos forem carregados
+        this.applyFilters();
       } catch (error) {
         console.error("Error fetching projects:", error);
         alert("Failed to load projects.");
@@ -175,7 +173,6 @@ export default {
       }
     },
     applyFilters() {
-      // Filtrar os projetos baseados nos filtros definidos
       this.filteredProjects = this.projects.filter((project) => {
         const matchesName =
           this.filters.name === "" ||
@@ -212,7 +209,9 @@ export default {
 
 <style scoped>
 .projects-page {
-  padding: 15px 30px;
+  padding: 50px 30px;
+  padding-top: 50px;
+  padding-bottom: 10px;
 }
 
 .page-title {
@@ -388,7 +387,7 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .pagination button {

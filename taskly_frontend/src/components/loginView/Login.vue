@@ -33,6 +33,10 @@
         </div>
       </form>
     </div>
+    <div class="default-credentials">
+      <p>Default email: silva@gmail.com</p>
+      <p>Default password: 12345</p>
+    </div>
   </section>
 </template>
 
@@ -87,7 +91,8 @@ export default {
 <style scoped>
 .login {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 80px;
   padding: 20px;
 }
@@ -175,5 +180,10 @@ export default {
 
 .register-link a:hover {
   text-decoration: underline;
+}
+
+.default-credentials {
+  color: red;
+  margin-top: -50px;
 }
 </style>
