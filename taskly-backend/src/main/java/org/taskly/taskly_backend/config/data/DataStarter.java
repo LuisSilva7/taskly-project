@@ -321,6 +321,41 @@ public class DataStarter implements CommandLineRunner {
                     .build();
 
             projectRepository.save(project4);
+
+            var project5 = Project.builder()
+                    .name("E-commerce Platform Revamp")
+                    .description("Revamping the company's e-commerce platform.")
+                    .budget(new java.math.BigDecimal(200000))
+                    .startDate(LocalDate.parse("2024-05-01"))
+                    .expectedEndDate(LocalDate.parse("2025-05-01"))
+                    .progress(30)
+                    .status(IN_PROGRESS)
+                    .category(TECHNOLOGY)
+                    .priority(HIGH)
+                    .projectManager(userRepository.findByEmail("silva@gmail.com")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "User with email: silva@gmail.com not found!")))
+                    .projectMembers(List.of(
+                            userRepository.findByEmail("silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: silva@gmail.com not found!")),
+                            userRepository.findByEmail("gomes@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: gomes@gmail.com not found!")),
+                            userRepository.findByEmail("fernanda.almeida@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: fernanda.almeida@gmail.com not found!")),
+                            userRepository.findByEmail("lucas.mendes@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: lucas.mendes@gmail.com not found!")),
+                            userRepository.findByEmail("ana.silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: ana.silva@gmail.com not found!"))))
+                    .createdBy("silva@gmail.com")
+                    .build();
+
+
+            projectRepository.save(project5);
         }
     }
 }

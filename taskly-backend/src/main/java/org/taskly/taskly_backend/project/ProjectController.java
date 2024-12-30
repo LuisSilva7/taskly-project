@@ -26,8 +26,8 @@ public class ProjectController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<ProjectResponse>>> findAllProjects(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "pageSize", defaultValue = "10", required = false) int size
     ) {
         PageResponse<ProjectResponse> response = projectService.findAllProjects(page, size);
 

@@ -2,10 +2,7 @@
   <section class="hero">
     <div class="projects-container">
       <div class="header">
-        <h2>📂 Projects</h2>
-        <button @click="createProject" class="create-btn">
-          + Create New Project
-        </button>
+        <h2>📂 Recent Projects</h2>
       </div>
       <div class="projects-list">
         <ul>
@@ -72,11 +69,14 @@ export default {
           throw new Error("No authentication token found");
         }
 
-        const response = await axios.get("/api/v1/projects", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "/api/v1/projects?pageNumber=0&pageSize=2",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         this.ongoingProjects = response.data.data.content;
       } catch (error) {
@@ -86,9 +86,6 @@ export default {
     },
     viewProject(project) {
       alert(`Viewing details for project: ${project.name}`);
-    },
-    createProject() {
-      alert("Create a new project functionality will be implemented here.");
     },
   },
 };
@@ -107,7 +104,7 @@ export default {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Centraliza o título */
   align-items: center;
   margin-bottom: 30px;
 }
@@ -115,22 +112,7 @@ export default {
 h2 {
   font-size: 2rem;
   color: #2c3e50;
-}
-
-.create-btn {
-  padding: 12px 25px;
-  background-color: #094067;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.create-btn:hover {
-  background-color: #27ae60;
-  transform: scale(1.05);
+  text-align: center; /* Garante que o título estará centralizado */
 }
 
 ul {

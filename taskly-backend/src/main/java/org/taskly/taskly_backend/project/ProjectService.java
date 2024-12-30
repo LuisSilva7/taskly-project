@@ -43,20 +43,12 @@ public class ProjectService {
     }
 
     public PageResponse<ProjectResponse> findAllProjects(int pageNumber, int pageSize) {
-        if (pageNumber < 0) {
-            pageNumber = 0;
-        }
-
-        if (pageSize <= 0) {
-            pageSize = 10;
-        }
+        pageNumber = Math.max(0, pageNumber);
+        pageSize = pageSize > 0 ? pageSize : 10;
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("createdDate").descending());
-        Page<Project> projects = projectRepository.findAllProjects(pageable);
 
-        if (projects.isEmpty()) {
-            throw new ResourceNotFoundException("No projects found!");
-        }
+        Page<Project> projects = projectRepository.findAllProjects(pageable);
 
         List<ProjectResponse> response = projects.stream()
                 .map(projectMapper::toProjectResponse)
