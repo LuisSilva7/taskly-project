@@ -11,7 +11,7 @@
         <ul>
           <li
             v-for="project in ongoingProjects"
-            :key="project.name"
+            :key="project.id"
             class="project-item"
           >
             <div class="project-info">
@@ -52,50 +52,38 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      ongoingProjects: [
-        {
-          name: "Project Alpha",
-          description: "Developing a new product for the tech market.",
-          startDate: "2024-01-15",
-          expectedEndDate: "2024-07-15",
-          progress: 45,
-          category: "Tech",
-          priority: "High",
-        },
-        {
-          name: "Project Beta",
-          description: "Enhancing the customer service platform.",
-          startDate: "2024-03-01",
-          expectedEndDate: "2024-06-30",
-          progress: 80,
-          category: "Customer Service",
-          priority: "Medium",
-        },
-        {
-          name: "Project Delta",
-          description: "Building an advanced analytics dashboard.",
-          startDate: "2024-02-10",
-          expectedEndDate: "2024-08-30",
-          progress: 60,
-          category: "Analytics",
-          priority: "Low",
-        },
-        {
-          name: "Project Gamma",
-          description: "Research and analysis for new market opportunities.",
-          startDate: "2024-05-01",
-          expectedEndDate: "2024-12-01",
-          progress: 100,
-          category: "Research",
-          priority: "High",
-        },
-      ],
+      ongoingProjects: [],
     };
   },
+  mounted() {
+    this.fetchProjects();
+  },
   methods: {
+    async fetchProjects() {
+      try {
+        const token = localStorage.getItem("auth_token");
+
+        if (!token) {
+          throw new Error("No authentication token found");
+        }
+
+        const response = await axios.get("/api/v1/projects", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        this.ongoingProjects = response.data.data.content;
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        alert("Failed to load projects.");
+      }
+    },
     viewProject(project) {
       alert(`Viewing details for project: ${project.name}`);
     },
