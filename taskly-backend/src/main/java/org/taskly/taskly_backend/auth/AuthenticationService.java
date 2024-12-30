@@ -39,7 +39,6 @@ public class AuthenticationService {
         var userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new ResourceNotFoundException("Role with name: USER not found!"));
 
-        // Criação do usuário
         var user = User.builder()
                 .firstname(request.firstname())
                 .lastname(request.lastname())
@@ -52,26 +51,21 @@ public class AuthenticationService {
                 .roles(List.of(userRole))
                 .build();
 
-        // Se não houver foto na requisição, atribui a foto padrão
         if (photoFile == null || photoFile.isEmpty()) {
             user.setPhotoUrl("http://localhost:8888/uploads/users/user-default.png");
         } else {
-            // Salva a imagem com o ID do usuário
             String fileExtension = getFileExtension(photoFile);
-            String fileName = "user-" + UUID.randomUUID() + "." + fileExtension; // Usando o ID do usuário no nome do arquivo
+            String fileName = "user-" + UUID.randomUUID() + "." + fileExtension;
 
-            Path uploadPath = Path.of("src/main/resources/static/uploads/users"); // Caminho do diretório onde as imagens serão salvas
+            Path uploadPath = Path.of("src/main/resources/static/uploads/users");
 
-            Path filePath = uploadPath.resolve(fileName); // Caminho completo para o arquivo
+            Path filePath = uploadPath.resolve(fileName);
 
-            // Salva o arquivo no diretório
             Files.copy(photoFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Atualiza o caminho completo no photoUrl
             user.setPhotoUrl("http://localhost:8888/uploads/users/" + fileName);
         }
 
-        // Salva o usuário no banco de dados
         userRepository.save(user);
     }
 
@@ -80,7 +74,7 @@ public class AuthenticationService {
         if (fileName != null && fileName.contains(".")) {
             return fileName.substring(fileName.lastIndexOf(".") + 1);
         }
-        return "jpg"; // Caso não tenha extensão, você pode padronizar para um tipo (jpg, por exemplo)
+        return "jpg";
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

@@ -19,7 +19,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<?>> register(
             @ModelAttribute @Valid RegistrationRequest request,
-            @RequestParam("photoUrl") MultipartFile photoUrl
+            @RequestParam(value = "photoUrl", required = false) MultipartFile photoUrl
     ) throws IOException {
         authenticationService.register(request, photoUrl);
 
