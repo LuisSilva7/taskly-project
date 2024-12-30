@@ -18,7 +18,6 @@
 
 <script>
 export default {
-  name: "Hero",
   methods: {
     redirectToRegister() {
       this.$router.push("/register");

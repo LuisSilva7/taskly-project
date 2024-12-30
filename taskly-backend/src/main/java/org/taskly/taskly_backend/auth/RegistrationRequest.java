@@ -14,9 +14,8 @@ public record RegistrationRequest(
         @Past(message = "Date of birth must be in the past.")
         LocalDate dateOfBirth,
         @NotNull(message = "Job role cannot be null.")
-        @Size(min = 2, max = 40, message = "Job role must be between 2 and 50 characters.")
+        @Size(min = 2, max = 40, message = "Job role must be between 2 and 40 characters.")
         String jobRole,
-        String photoUrl,
         @NotEmpty(message = "Email is mandatory")
         @NotBlank(message = "Email is mandatory")
         @Email(message = "Email is not valid")
@@ -27,3 +26,4 @@ public record RegistrationRequest(
         String password
 ) {
 }
+

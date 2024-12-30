@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.taskly.taskly_backend.config.security.JwtService;
 import org.taskly.taskly_backend.exception.custom.ResourceAlreadyExistsException;
 import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
@@ -12,8 +13,13 @@ import org.taskly.taskly_backend.role.RoleRepository;
 import org.taskly.taskly_backend.user.User;
 import org.taskly.taskly_backend.user.UserRepository;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +31,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-    public void register(RegistrationRequest request) {
+    public void register(RegistrationRequest request, MultipartFile photoFile) throws IOException {
         if (userRepository.findByEmail(request.email()).isPresent()) {
             throw new ResourceAlreadyExistsException("Email " + request.email() + " already exists!");
         }
@@ -33,13 +39,12 @@ public class AuthenticationService {
         var userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new ResourceNotFoundException("Role with name: USER not found!"));
 
-        // falta por as relacoes
+        // Criação do usuário
         var user = User.builder()
                 .firstname(request.firstname())
                 .lastname(request.lastname())
                 .dateOfBirth(request.dateOfBirth())
                 .jobRole(request.jobRole())
-                .photoUrl(request.photoUrl())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .accountLocked(false)
@@ -47,62 +52,36 @@ public class AuthenticationService {
                 .roles(List.of(userRole))
                 .build();
 
-        if(request.photoUrl() == null) {
-            // todo - guardar o path para uma foto padrao
+        // Se não houver foto na requisição, atribui a foto padrão
+        if (photoFile == null || photoFile.isEmpty()) {
             user.setPhotoUrl("http://localhost:8888/uploads/users/user-default.png");
-            // else guardar o path
+        } else {
+            // Salva a imagem com o ID do usuário
+            String fileExtension = getFileExtension(photoFile);
+            String fileName = "user-" + UUID.randomUUID() + "." + fileExtension; // Usando o ID do usuário no nome do arquivo
+
+            Path uploadPath = Path.of("src/main/resources/static/uploads/users"); // Caminho do diretório onde as imagens serão salvas
+
+            Path filePath = uploadPath.resolve(fileName); // Caminho completo para o arquivo
+
+            // Salva o arquivo no diretório
+            Files.copy(photoFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Atualiza o caminho completo no photoUrl
+            user.setPhotoUrl("http://localhost:8888/uploads/users/" + fileName);
         }
 
+        // Salva o usuário no banco de dados
         userRepository.save(user);
     }
 
-    /*public void processPhoto(Long userId, MultipartFile photoFile, String photoUrl) {
-        String photoPath;
-
-        // Define o diretório onde as fotos serão armazenadas
-        String uploadDir = "src/main/resources/static/uploads/users/";
-
-        // Verifica se o diretório existe e cria caso não exista
-        File directory = new File(uploadDir);
-        if (!directory.exists()) {
-            directory.mkdirs();
+    private String getFileExtension(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        if (fileName != null && fileName.contains(".")) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
         }
-
-        if (photoUrl == null || photoUrl.isEmpty()) {
-            // Foto padrão
-            photoPath = uploadDir + "default.png"; // Nome do arquivo da foto padrão
-            System.out.println("Foto padrão será usada: " + photoPath);
-        } else {
-            try {
-                // Obtém o tipo de arquivo e verifica se é válido
-                String originalFileName = photoFile.getOriginalFilename();
-                String fileExtension = "";
-
-                if (originalFileName != null && originalFileName.contains(".")) {
-                    fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-                }
-
-                // Verifica extensões permitidas
-                if (!fileExtension.matches("\\.(png|jpg|jpeg)$")) {
-                    throw new IllegalArgumentException("Formato de arquivo não suportado!");
-                }
-
-                // Cria o nome do arquivo baseado no ID do usuário
-                String fileName = "profile-" + userId + fileExtension;
-
-                // Define o caminho completo do arquivo
-                photoPath = uploadDir + fileName;
-
-                // Salva o arquivo no diretório
-                File targetFile = new File(photoPath);
-                photoFile.transferTo(targetFile);
-
-                System.out.println("Foto salva com sucesso: " + photoPath);
-            } catch (Exception e) {
-                throw new RuntimeException("Erro ao salvar a foto: " + e.getMessage(), e);
-            }
-        }
-    }*/
+        return "jpg"; // Caso não tenha extensão, você pode padronizar para um tipo (jpg, por exemplo)
+    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         if (userRepository.findByEmail(request.email()).isEmpty()) {

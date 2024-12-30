@@ -1,7 +1,7 @@
 <template>
-  <div class="home-container">
+  <div class="login-container">
     <Navbar />
-    <main class="home">
+    <main class="login">
       <Login />
     </main>
     <Footer />
@@ -14,7 +14,6 @@ import Footer from "../components/shared/Footer.vue";
 import Login from "../components/loginView/Login.vue";
 
 export default {
-  name: "Home",
   components: {
     Navbar,
     Footer,
@@ -24,13 +23,13 @@ export default {
 </script>
 
 <style scoped>
-.home-container {
+.login-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.home {
+.login {
   flex: 1;
 }
 </style>

@@ -16,7 +16,6 @@ import Hero from "../components/homeView/Hero.vue";
 import Features from "../components/homeView/Features.vue";
 
 export default {
-  name: "Home",
   components: {
     Navbar,
     Footer,
