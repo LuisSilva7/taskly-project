@@ -28,32 +28,61 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/projects",
     name: "Projects",
     component: Projects,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/tasks",
     name: "Tasks",
     component: Tasks,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/reports",
     name: "Reports",
     component: Reports,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/profile",
     name: "Profile",
     component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem("auth_token");
+
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!isAuthenticated) {
+      next({ path: "/login" });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
