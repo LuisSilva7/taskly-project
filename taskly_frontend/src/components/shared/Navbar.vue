@@ -169,8 +169,8 @@ a {
 }
 
 .profile-photo {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   margin-right: 8px;
 }
