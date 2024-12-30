@@ -119,10 +119,6 @@ public class ProjectService {
             project.setExpectedEndDate(request.expectedEndDate());
         }
 
-        if (request.attachmentsUrl() != null) {
-            project.setAttachmentsUrl(request.attachmentsUrl());
-        }
-
         if(request.status() != null) {
             project.setStatus(ProjectStatus.fromString(request.status()));
         }

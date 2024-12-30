@@ -34,10 +34,6 @@ public class Project extends BaseEntity {
     private LocalDate expectedEndDate;
     private LocalDate endDate;
     private Integer progress;
-    @ElementCollection
-    @CollectionTable(name = "project_attachments", joinColumns = @JoinColumn(name = "project_id"))
-    @Column(name = "attatchment_url")
-    private List<String> attachmentsUrl;
     @Enumerated(EnumType.STRING)
     private ProjectStatus status;
     @Enumerated(EnumType.STRING)

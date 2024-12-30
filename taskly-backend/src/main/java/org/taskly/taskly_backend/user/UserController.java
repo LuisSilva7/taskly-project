@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.taskly.taskly_backend.common.ApiResponse;
+import org.taskly.taskly_backend.common.PageResponse;
 
 import java.io.IOException;
 
@@ -16,6 +17,17 @@ import java.io.IOException;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<ApiResponse<PageResponse<UserResponse>>> findAllUsers(
+            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "pageSize", defaultValue = "10", required = false) int size
+    ) {
+        PageResponse<UserResponse> response = userService.findAllUsers(page, size);
+
+        return ResponseEntity.ok(new ApiResponse<>(
+                "Users obtained successfully!", response));
+    }
 
     @GetMapping("/user")
     public ResponseEntity<ApiResponse<UserResponse>> findUser(Authentication connectedUser) {

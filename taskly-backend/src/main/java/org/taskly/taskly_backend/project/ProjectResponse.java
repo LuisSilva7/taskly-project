@@ -10,7 +10,6 @@ public record ProjectResponse (
         LocalDate startDate,
         LocalDate expectedEndDate,
         double progress,
-        List<String> attachmentsUrl,
         String status,
         String category,
         String priority,

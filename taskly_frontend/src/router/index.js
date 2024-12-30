@@ -4,6 +4,7 @@ import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Projects from "../views/Projects.vue";
+import CreateProject from "../views/CreateProject.vue";
 import Tasks from "../views/Tasks.vue";
 import Reports from "../views/Reports.vue";
 import Profile from "../views/Profile.vue";
@@ -36,6 +37,14 @@ const routes = [
     path: "/projects",
     name: "Projects",
     component: Projects,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/createProject",
+    name: "CreateProject",
+    component: CreateProject,
     meta: {
       requiresAuth: true,
     },

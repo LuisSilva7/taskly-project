@@ -40,7 +40,6 @@ public class ProjectMapper {
                 .expectedEndDate(request.expectedEndDate())
                 .endDate(null)
                 .progress(0)
-                .attachmentsUrl(request.attachmentsUrl())
                 .status(ProjectStatus.fromString(request.status()))
                 .category(ProjectCategory.fromString(request.category()))
                 .priority(ProjectPriority.fromString(request.priority()))
@@ -58,7 +57,6 @@ public class ProjectMapper {
                 project.getStartDate(),
                 project.getExpectedEndDate(),
                 project.getProgress(),
-                project.getAttachmentsUrl(),
                 project.getStatus().getStatus(),
                 project.getCategory().getCategory(),
                 project.getPriority().getPriority(),

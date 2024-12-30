@@ -198,7 +198,7 @@ export default {
       alert(`Viewing details for project: ${projectId}`);
     },
     createNewProject() {
-      alert("Create a new project functionality will be implemented here.");
+      this.$router.push("/createProject");
     },
   },
   mounted() {

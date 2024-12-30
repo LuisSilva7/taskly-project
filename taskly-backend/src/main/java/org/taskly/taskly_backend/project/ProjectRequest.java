@@ -22,7 +22,6 @@ public record ProjectRequest(
         @NotNull(message = "Expected end date cannot be null")
         @FutureOrPresent(message = "Expected end date must be in the future")
         LocalDate expectedEndDate,
-        List<String> attachmentsUrl,
         @NotBlank(message = "Project status cannot be null")
         String status,
         @NotBlank(message = "Project category cannot be null")

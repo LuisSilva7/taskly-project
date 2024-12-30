@@ -29,10 +29,6 @@ public class Task extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
     private LocalDate deadline;
-    @ElementCollection
-    @CollectionTable(name = "task_attachments", joinColumns = @JoinColumn(name = "task_id"))
-    @Column(name = "attatchment_url")
-    private List<String> attachmentsUrl;
 
     @ManyToOne
     @JoinColumn(name = "project_id")

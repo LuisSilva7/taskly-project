@@ -1,14 +1,22 @@
 package org.taskly.taskly_backend.user;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.taskly.taskly_backend.common.PageResponse;
+import org.taskly.taskly_backend.project.Project;
+import org.taskly.taskly_backend.project.ProjectResponse;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -17,6 +25,29 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+
+    public PageResponse<UserResponse> findAllUsers(int pageNumber, int pageSize) {
+        pageNumber = Math.max(0, pageNumber);
+        pageSize = pageSize > 0 ? pageSize : 10;
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Page<User> users = userRepository.findAllUsers(pageable);
+
+        List<UserResponse> response = users.stream()
+                .map(userMapper::toUserResponse)
+                .toList();
+
+        return new PageResponse<>(
+                response,
+                users.getNumber(),
+                users.getSize(),
+                users.getTotalElements(),
+                users.getTotalPages(),
+                users.isFirst(),
+                users.isLast()
+        );
+    }
 
     public UserResponse findUser(Authentication connectedUser) {
         User user = ((User) connectedUser.getPrincipal());
