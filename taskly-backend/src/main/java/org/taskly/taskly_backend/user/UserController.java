@@ -29,6 +29,14 @@ public class UserController {
                 "Users obtained successfully!", response));
     }
 
+    @GetMapping("/{user-id}")
+    public ResponseEntity<ApiResponse<UserResponse>> findUserById(@PathVariable("user-id") Long userId) {
+        UserResponse response = userService.findUserById(userId);
+
+        return ResponseEntity.ok(new ApiResponse<>(
+                "User with ID: " + userId + " obtained successfully!", response));
+    }
+
     @GetMapping("/user")
     public ResponseEntity<ApiResponse<UserResponse>> findUser(Authentication connectedUser) {
         UserResponse response = userService.findUser(connectedUser);

@@ -37,7 +37,7 @@
               <span class="progress-text"
                 >{{ project.progress }}% completed</span
               >
-              <button @click="viewProject(project)" class="view-btn">
+              <button @click="viewProject(project.id)" class="view-btn">
                 View Details
               </button>
             </div>
@@ -84,8 +84,8 @@ export default {
         alert("Failed to load projects.");
       }
     },
-    viewProject(project) {
-      alert(`Viewing details for project: ${project.name}`);
+    viewProject(projectId) {
+      this.$router.push({ name: "Project", params: { projectId } });
     },
   },
 };

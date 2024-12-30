@@ -195,7 +195,7 @@ export default {
       return new Date(date).toLocaleDateString();
     },
     viewProject(projectId) {
-      alert(`Viewing details for project: ${projectId}`);
+      this.$router.push({ name: "Project", params: { projectId } });
     },
     createNewProject() {
       this.$router.push("/createProject");

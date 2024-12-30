@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.taskly.taskly_backend.common.PageResponse;
-import org.taskly.taskly_backend.project.Project;
-import org.taskly.taskly_backend.project.ProjectResponse;
+import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,6 +45,14 @@ public class UserService {
                 users.isFirst(),
                 users.isLast()
         );
+    }
+
+    public UserResponse findUserById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "User with ID: " + userId + " does not exist!"));
+
+        return userMapper.toUserResponse(user);
     }
 
     public UserResponse findUser(Authentication connectedUser) {

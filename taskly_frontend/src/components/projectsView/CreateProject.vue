@@ -162,7 +162,6 @@ export default {
 
     async submitProject() {
       try {
-        // Adiciona o Project Manager ao array de projectMembersId, caso ainda não esteja incluído
         if (
           this.project.projectManagerId &&
           !this.project.projectMembersId.includes(this.project.projectManagerId)
@@ -170,7 +169,6 @@ export default {
           this.project.projectMembersId.push(this.project.projectManagerId);
         }
 
-        // Cria o objeto com os dados do projeto
         const projectData = {
           name: this.project.name,
           description: this.project.description,
