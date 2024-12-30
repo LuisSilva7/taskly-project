@@ -12,6 +12,7 @@ import org.taskly.taskly_backend.common.BaseEntity;
 import org.taskly.taskly_backend.project.Project;
 import org.taskly.taskly_backend.user.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -27,7 +28,7 @@ public class Task extends BaseEntity {
     private String description;
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
-    private int estimatedTime;
+    private LocalDate deadline;
     @ElementCollection
     @CollectionTable(name = "task_attachments", joinColumns = @JoinColumn(name = "task_id"))
     @Column(name = "attatchment_url")

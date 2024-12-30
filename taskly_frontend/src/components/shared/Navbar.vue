@@ -1,10 +1,10 @@
 <template>
   <nav>
     <div class="logo">
-      <a href="/" class="logo-link">
+      <router-link to="/" class="logo-link">
         <img src="../../assets/images/logoT.png" alt="Logo" />
         <span class="logo-text">askly</span>
-      </a>
+      </router-link>
     </div>
 
     <div v-if="isAuthenticated">
@@ -14,10 +14,38 @@
         <div></div>
       </div>
       <ul :class="['menu', { 'menu-open': isMobileMenuOpen }]">
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/tasks">Tasks</a></li>
-        <li><a href="/reports">Reports</a></li>
+        <li>
+          <router-link
+            to="/dashboard"
+            class="nav-link"
+            active-class="active-link"
+          >
+            Dashboard
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/projects"
+            class="nav-link"
+            active-class="active-link"
+          >
+            Projects
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/tasks" class="nav-link" active-class="active-link">
+            Tasks
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/reports"
+            class="nav-link"
+            active-class="active-link"
+          >
+            Reports
+          </router-link>
+        </li>
         <li class="profile" @click="toggleProfileMenu">
           <img
             class="profile-photo"
@@ -30,7 +58,11 @@
           <i class="arrow-down"></i>
           <div v-if="isProfileMenuOpen" class="profile-menu">
             <ul>
-              <li><a href="/profile">Profile</a></li>
+              <li>
+                <router-link to="/profile" class="nav-link">
+                  Profile
+                </router-link>
+              </li>
               <li @click="logout">Logout</li>
             </ul>
           </div>
@@ -40,8 +72,14 @@
 
     <div v-else>
       <ul class="menu">
-        <li><a href="/register">Get Started</a></li>
-        <li><a href="/login" class="btn-login">Login</a></li>
+        <li>
+          <router-link to="/register" class="nav-link">
+            Get Started
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/login" class="btn-login"> Login </router-link>
+        </li>
       </ul>
     </div>
   </nav>
@@ -155,10 +193,14 @@ li {
   margin: 0 15px;
 }
 
-a {
+.nav-link {
   color: rgb(0, 0, 0);
   text-decoration: none;
   font-size: 1.2rem;
+}
+
+.active-link {
+  color: rgb(255, 128, 0);
 }
 
 .profile {
@@ -262,6 +304,7 @@ a {
     width: 200px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    z-index: 10000;
   }
 
   ul.menu.menu-open {

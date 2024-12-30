@@ -42,7 +42,7 @@ public class DataStarter implements CommandLineRunner {
                 .orElseThrow(() -> new ResourceNotFoundException("Role with name: USER not found!"));
 
         if(userRepository.findAll().isEmpty()) {
-            // ajeitar foto e relacoes
+            // relacoes
             var admin = User.builder()
                     .firstname("Luís")
                     .lastname("Silva")
@@ -58,7 +58,7 @@ public class DataStarter implements CommandLineRunner {
 
             userRepository.save(admin);
 
-            // ajeitar foto e relacoes
+            // relacoes
             var user1 = User.builder()
                     .firstname("André")
                     .lastname("Gomes")
@@ -74,7 +74,7 @@ public class DataStarter implements CommandLineRunner {
 
             userRepository.save(user1);
 
-            // ajeitar foto e relacoes
+            // relacoes
             var user2 = User.builder()
                     .firstname("Joana")
                     .lastname("Faria")
@@ -90,7 +90,7 @@ public class DataStarter implements CommandLineRunner {
 
             userRepository.save(user2);
 
-            // ajeitar foto e relacoes
+            // relacoes
             var user3 = User.builder()
                     .firstname("João")
                     .lastname("Rodrigues")
