@@ -183,6 +183,18 @@ public class ProjectService {
         return projectMapper.toProjectResponse(project);
     }
 
+    public void completeProject(Long projectId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Project with ID: " + projectId + " does not exist!"));
+
+        project.setEndDate(LocalDate.now());
+        project.setProgress(100);
+        project.setStatus(ProjectStatus.COMPLETED);
+
+        projectRepository.save(project);
+    }
+
     public void deleteProject(Long projectId) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException(

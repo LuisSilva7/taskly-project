@@ -56,6 +56,7 @@ public class ProjectMapper {
                 project.getDescription(),
                 project.getStartDate(),
                 project.getExpectedEndDate(),
+                project.getEndDate(),
                 project.getProgress(),
                 project.getStatus().getStatus(),
                 project.getCategory().getCategory(),

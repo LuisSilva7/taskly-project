@@ -19,6 +19,9 @@
       <p><strong>Description:</strong> {{ project.description }}</p>
       <p><strong>Start Date:</strong> {{ project.startDate }}</p>
       <p><strong>Expected End Date:</strong> {{ project.expectedEndDate }}</p>
+      <p v-if="project.endDate">
+        <strong>End Date:</strong> {{ project.endDate }}
+      </p>
       <p><strong>Progress:</strong> {{ project.progress }}%</p>
       <p><strong>Status:</strong> {{ formattedStatus }}</p>
       <p><strong>Category:</strong> {{ project.category }}</p>
@@ -77,7 +80,7 @@ export default {
     formattedStatus() {
       return this.project.status === "in_progress"
         ? "In Progress"
-        : this.project.status;
+        : "Completed";
     },
     filteredProjectMembersNames() {
       return this.projectMembersNames.filter(
@@ -142,7 +145,7 @@ export default {
     },
     async completeProject() {
       try {
-        await api.patch(`/projects/${this.projectId}/complete`);
+        await api.put(`/projects/${this.projectId}/complete`);
         this.fetchProjectDetails();
         alert("Project completed successfully!");
       } catch (error) {

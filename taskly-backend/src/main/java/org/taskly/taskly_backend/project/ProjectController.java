@@ -54,6 +54,16 @@ public class ProjectController {
                 "Project with ID: " + projectId + " updated successfully!", response));
     }
 
+    @PutMapping("/{project-id}/complete")
+    public ResponseEntity<ApiResponse<?>> completeProject(
+            @PathVariable("project-id") Long projectId
+    ) {
+        projectService.completeProject(projectId);
+
+        return ResponseEntity.ok(new ApiResponse<>(
+                "Project with ID: " + projectId + " completed successfully!", null));
+    }
+
     @DeleteMapping("/{project-id}")
     public ResponseEntity<ApiResponse<?>> deleteProject(
             @PathVariable("project-id") Long projectId

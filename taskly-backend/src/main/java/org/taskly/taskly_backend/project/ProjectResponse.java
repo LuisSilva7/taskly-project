@@ -9,6 +9,7 @@ public record ProjectResponse (
         String description,
         LocalDate startDate,
         LocalDate expectedEndDate,
+        LocalDate endDate,
         double progress,
         String status,
         String category,
