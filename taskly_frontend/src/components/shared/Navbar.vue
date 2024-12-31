@@ -36,15 +36,6 @@
             Tasks
           </router-link>
         </li>
-        <li>
-          <router-link
-            to="/reports"
-            class="nav-link"
-            active-class="active-link"
-          >
-            Reports
-          </router-link>
-        </li>
         <li class="profile" @click="toggleProfileMenu">
           <img
             class="profile-photo"
