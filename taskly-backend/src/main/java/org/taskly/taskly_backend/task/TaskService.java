@@ -5,13 +5,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.taskly.taskly_backend.common.PageResponse;
 import org.taskly.taskly_backend.exception.custom.ResourceAlreadyExistsException;
 import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
 import org.taskly.taskly_backend.project.Project;
 import org.taskly.taskly_backend.project.ProjectRepository;
+import org.taskly.taskly_backend.project.enums.ProjectStatus;
+import org.taskly.taskly_backend.user.User;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +64,40 @@ public class TaskService {
                 tasks.isFirst(),
                 tasks.isLast()
         );
+    }
+
+    public PageResponse<TaskResponse> findAllTasksByUser(int page, int size, Authentication connectedUser) {
+        page = Math.max(0, page);
+        size = size > 0 ? size : 10;
+
+        User user = ((User) connectedUser.getPrincipal());
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
+
+        Page<Task> tasks = taskRepository.findAllTasksByUser(pageable, user.getId());
+
+        List<TaskResponse> response = tasks.stream()
+                .map(taskMapper::toTaskResponse)
+                .toList();
+
+        return new PageResponse<>(
+                response,
+                tasks.getNumber(),
+                tasks.getSize(),
+                tasks.getTotalElements(),
+                tasks.getTotalPages(),
+                tasks.isFirst(),
+                tasks.isLast()
+        );
+    }
+
+    public void completeTask(Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Task with ID: " + taskId + " does not exist!"));
+
+        task.setStatus(TaskStatus.COMPLETED);
+
+        taskRepository.save(task);
     }
 }

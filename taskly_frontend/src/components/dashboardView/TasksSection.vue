@@ -2,15 +2,15 @@
   <section class="tasks">
     <h2>📝 Pending Tasks</h2>
     <ul>
-      <li v-for="task in tasks" :key="task.name" class="task-item">
+      <li v-for="task in tasks" :key="task.id" class="task-item">
         <div class="task-info">
-          <span class="task-name">{{ task.name }}</span>
+          <span class="task-name">{{ task.title }}</span>
           <p class="task-description">{{ task.description }}</p>
-          <span class="task-project">Project: {{ task.project }}</span>
+          <span class="task-project">Project: {{ task.projectName }}</span>
         </div>
         <div class="task-details">
           <span class="deadline">Deadline: {{ task.deadline }}</span>
-          <button @click="completeTask(task)" class="complete-btn">
+          <button @click="completeTask(task.id)" class="complete-btn">
             ✔️ Complete
           </button>
         </div>
@@ -20,44 +20,72 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      tasks: [
-        {
-          name: "Task Alpha",
-          description: "Complete the user interface design for the new app.",
-          deadline: "2024-02-15",
-          project: "Project Alpha",
-          priority: "high",
-        },
-        {
-          name: "Task Beta",
-          description: "Test the newly integrated features for performance.",
-          deadline: "2024-03-01",
-          project: "Project Beta",
-          priority: "medium",
-        },
-        {
-          name: "Task Gamma",
-          description: "Prepare documentation for the final report.",
-          deadline: "2024-01-20",
-          project: "Project Gamma",
-          priority: "low",
-        },
-        {
-          name: "Task Delta",
-          description: "Conduct a security audit of the backend services.",
-          deadline: "2024-02-10",
-          project: "Project Delta",
-          priority: "high",
-        },
-      ],
+      tasks: [],
     };
   },
+  mounted() {
+    this.fetchTasks();
+  },
   methods: {
-    completeTask(task) {
-      alert(`Task completed: ${task.name}`);
+    async fetchTasks() {
+      try {
+        const token = localStorage.getItem("auth_token");
+        const response = await axios.get("/api/v1/tasks/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const inProgressTasks = response.data.data.content.filter(
+          (task) => task.status === "in_progress"
+        );
+        const tasksWithProjectName = await Promise.all(
+          inProgressTasks.map(async (task) => {
+            try {
+              const projectResponse = await axios.get(
+                `/api/v1/projects/${task.projectId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+              task.projectName = projectResponse.data.data.name;
+              return task;
+            } catch (error) {
+              console.error("Error fetching project for task:", error);
+              return task;
+            }
+          })
+        );
+        this.tasks = tasksWithProjectName;
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+        alert("Failed to fetch tasks");
+      }
+    },
+    async completeTask(id) {
+      try {
+        const token = localStorage.getItem("auth_token");
+        const response = await axios.put(
+          `/api/v1/tasks/${id}/complete`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        this.fetchTasks();
+        alert("Task completed successfully!");
+      } catch (error) {
+        console.error("Error completing task:", error);
+        alert("Failed to complete the task.");
+      }
     },
   },
 };

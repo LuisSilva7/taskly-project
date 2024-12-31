@@ -32,11 +32,6 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/tasks" class="nav-link" active-class="active-link">
-            Tasks
-          </router-link>
-        </li>
-        <li>
           <router-link to="/chat" class="nav-link" active-class="active-link">
             Chat
           </router-link>
