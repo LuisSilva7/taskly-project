@@ -2,7 +2,7 @@
   <div class="dashboard-container">
     <Navbar />
     <main class="dashboard">
-      <ReportsSection />
+      <StatisticsSection />
       <ProjectsSection />
       <TasksSection />
     </main>
@@ -15,7 +15,7 @@ import Navbar from "../components/shared/Navbar.vue";
 import Footer from "../components/shared/Footer.vue";
 import ProjectsSection from "../components/dashboardView/ProjectsSection.vue";
 import TasksSection from "../components/dashboardView/TasksSection.vue";
-import ReportsSection from "../components/dashboardView/ReportsSection.vue";
+import StatisticsSection from "../components/dashboardView/StatisticsSection.vue";
 
 export default {
   components: {
@@ -23,7 +23,7 @@ export default {
     Footer,
     ProjectsSection,
     TasksSection,
-    ReportsSection,
+    StatisticsSection,
   },
 };
 </script>
