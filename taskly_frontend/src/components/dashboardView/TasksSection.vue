@@ -58,7 +58,6 @@ export default {
   methods: {
     completeTask(task) {
       alert(`Task completed: ${task.name}`);
-      // Implement logic for marking the task as completed
     },
   },
 };

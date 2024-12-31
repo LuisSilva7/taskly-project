@@ -6,7 +6,6 @@
         <label for="name">Project Name</label>
         <input type="text" id="name" v-model="project.name" required />
       </div>
-
       <div class="form-group">
         <label for="description">Description</label>
         <textarea
@@ -15,7 +14,6 @@
           required
         ></textarea>
       </div>
-
       <div class="form-group">
         <label for="budget">Budget</label>
         <input
@@ -25,7 +23,6 @@
           required
         />
       </div>
-
       <div class="form-group">
         <label for="startDate">Start Date</label>
         <input
@@ -35,7 +32,6 @@
           required
         />
       </div>
-
       <div class="form-group">
         <label for="expectedEndDate">Expected End Date</label>
         <input
@@ -45,7 +41,6 @@
           required
         />
       </div>
-
       <div class="form-group">
         <label for="category">Category</label>
         <select id="category" v-model="project.category" required>
@@ -61,7 +56,6 @@
           <option value="EDUCATION">Education</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="priority">Priority</label>
         <select id="priority" v-model="project.priority" required>
@@ -102,7 +96,6 @@
           </button>
         </div>
       </div>
-
       <button type="submit" class="submit-btn">Create Project</button>
     </form>
   </section>
@@ -146,11 +139,9 @@ export default {
         console.error("Erro ao buscar usuários:", error);
       }
     },
-
     addProjectManager(userId) {
       this.project.projectManagerId = userId;
     },
-
     addProjectMember(userId) {
       const index = this.project.projectMembersId.indexOf(userId);
       if (index > -1) {
@@ -159,7 +150,6 @@ export default {
         this.project.projectMembersId.push(userId);
       }
     },
-
     async submitProject() {
       try {
         if (
@@ -168,7 +158,6 @@ export default {
         ) {
           this.project.projectMembersId.push(this.project.projectManagerId);
         }
-
         const projectData = {
           name: this.project.name,
           description: this.project.description,
@@ -181,19 +170,17 @@ export default {
           projectManagerId: this.project.projectManagerId,
           projectMembersId: this.project.projectMembersId,
         };
-
         const token = localStorage.getItem("auth_token");
         await axios.post("/api/v1/projects", projectData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
         alert("Project created successfully!");
         this.$router.push("/projects");
       } catch (error) {
-        console.error("Erro ao criar o projeto:", error);
-        alert("Falha ao criar o projeto.");
+        console.error("Error creating project:", error);
+        alert("Error creating project.");
       }
     },
   },

@@ -56,27 +56,22 @@ export default {
         email: this.email,
         password: this.password,
       };
-
       try {
         const response = await axios.post(
           "/api/v1/auth/authenticate",
           credentials
         );
-
         if (response.data && response.data.data.token) {
           localStorage.setItem("auth_token", response.data.data.token);
-
           const username = response.data.data.firstname;
           const photoUrl = response.data.data.photoUrl;
           localStorage.setItem("username", username);
           localStorage.setItem("photoUrl", photoUrl);
-
           const tokenExpiration = 8640000;
           localStorage.setItem(
             "token_expiration",
             Date.now() + tokenExpiration
           );
-
           this.$router.push("/dashboard");
         }
       } catch (error) {

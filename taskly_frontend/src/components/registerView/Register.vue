@@ -12,7 +12,6 @@
           placeholder="Enter your first name"
         />
       </div>
-
       <div class="form-group">
         <label for="lastname">Last Name</label>
         <input
@@ -23,7 +22,6 @@
           placeholder="Enter your last name"
         />
       </div>
-
       <div class="form-group">
         <label for="dateOfBirth">Date of Birth</label>
         <input type="date" id="dateOfBirth" v-model="dateOfBirth" required />
@@ -39,7 +37,6 @@
           placeholder="Enter your job role"
         />
       </div>
-
       <div class="form-group">
         <label for="photoUrl">Photo</label>
         <input type="file" id="photoUrl" @change="handleFileChange" />
@@ -52,7 +49,6 @@
           />
         </div>
       </div>
-
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -63,7 +59,6 @@
           placeholder="Enter your email"
         />
       </div>
-
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -74,10 +69,8 @@
           placeholder="Enter your password"
         />
       </div>
-
       <button type="submit" class="btn-register">Register</button>
     </form>
-
     <div class="login-option">
       <p>
         Already have an account?
@@ -112,18 +105,15 @@ export default {
       formData.append("jobRole", this.jobRole);
       formData.append("email", this.email);
       formData.append("password", this.password);
-
       if (this.photoUrl) {
         formData.append("photoUrl", this.photoUrl);
       }
-
       try {
         const response = await axios.post("/api/v1/auth/register", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-
         if (response.status === 200) {
           alert("Registration successful!");
           this.$router.push("/login");
@@ -135,7 +125,6 @@ export default {
         alert("Registration failed. Please try again.");
       }
     },
-
     handleFileChange(event) {
       const file = event.target.files[0];
       if (file) {

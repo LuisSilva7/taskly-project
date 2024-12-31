@@ -6,7 +6,6 @@
         <span class="logo-text">askly</span>
       </router-link>
     </div>
-
     <div v-if="isAuthenticated">
       <div class="hamburger" @click="toggleMobileMenu">
         <div></div>
@@ -69,7 +68,6 @@
         </li>
       </ul>
     </div>
-
     <div v-else>
       <ul class="menu">
         <li>
@@ -112,7 +110,6 @@ export default {
         this.isAuthenticated = false;
       }
     },
-
     toggleProfileMenu() {
       this.isProfileMenuOpen = !this.isProfileMenuOpen;
     },
@@ -120,7 +117,6 @@ export default {
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
     },
-
     logout() {
       localStorage.removeItem("auth_token");
       localStorage.removeItem("token_expiration");

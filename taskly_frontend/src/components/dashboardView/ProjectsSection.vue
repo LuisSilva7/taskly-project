@@ -25,14 +25,12 @@
               </p>
               <p class="project-category">Category: {{ project.category }}</p>
             </div>
-
             <div class="progress-bar">
               <div
                 class="progress"
                 :style="{ width: project.progress + '%' }"
               ></div>
             </div>
-
             <div class="project-actions">
               <span class="progress-text"
                 >{{ project.progress }}% completed</span
@@ -68,7 +66,6 @@ export default {
         if (!token) {
           throw new Error("No authentication token found");
         }
-
         const response = await axios.get(
           "/api/v1/projects?pageNumber=0&pageSize=2",
           {
@@ -77,7 +74,6 @@ export default {
             },
           }
         );
-
         this.ongoingProjects = response.data.data.content;
       } catch (error) {
         console.error("Error fetching projects:", error);

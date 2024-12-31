@@ -4,7 +4,6 @@
     <main class="projects">
       <ProjectInfo :projectId="projectId" />
       <ProjectTasks :projectId="projectId" />
-      <ProjectChat :projectId="projectId" />
     </main>
     <Footer />
   </div>
@@ -15,7 +14,6 @@ import Navbar from "../components/shared/Navbar.vue";
 import Footer from "../components/shared/Footer.vue";
 import ProjectInfo from "../components/projectsView/ProjectInfo.vue";
 import ProjectTasks from "../components/projectsView/ProjectTasks.vue";
-import ProjectChat from "../components/projectsView/ProjectChat.vue";
 
 export default {
   data() {
@@ -28,7 +26,6 @@ export default {
     Footer,
     ProjectInfo,
     ProjectTasks,
-    ProjectChat,
   },
   created() {
     const projectId = this.$route.params.projectId;

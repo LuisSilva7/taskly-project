@@ -58,12 +58,7 @@ public class User implements UserDetails, Principal {
     @ManyToMany(mappedBy = "projectMembers")
     private List<Project> projects;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_tasks",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id")
-    )
+    @ManyToMany(mappedBy = "taskMembers")
     private List<Task> userTasks;
 
     //relacao com mensagens

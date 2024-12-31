@@ -30,7 +30,6 @@
       </p>
     </div>
   </section>
-
   <div v-else>
     <p>Loading project details...</p>
   </div>
@@ -104,7 +103,6 @@ export default {
         this.isLoading = false;
       }
     },
-
     async fetchProjectManager(managerId) {
       try {
         const response = await api.get(`/users/${managerId}`);
@@ -114,7 +112,6 @@ export default {
         this.projectManagerName = "Manager Not Found";
       }
     },
-
     async fetchProjectMembers(membersIds) {
       try {
         const membersPromises = membersIds.map((id) => api.get(`/users/${id}`));
@@ -128,11 +125,9 @@ export default {
         this.projectMembersNames = ["Members not found"];
       }
     },
-
     editProject() {
       this.$router.push(`/editProject/${this.projectId}`);
     },
-
     async deleteProject() {
       if (confirm("Are you sure you want to delete this project?")) {
         try {
@@ -145,7 +140,6 @@ export default {
         }
       }
     },
-
     async completeProject() {
       try {
         await api.patch(`/projects/${this.projectId}/complete`);
@@ -164,7 +158,6 @@ export default {
 .project-info {
   padding: 40px 20px;
   border-radius: 8px;
-  margin-bottom: 30px;
 }
 
 .project-header {

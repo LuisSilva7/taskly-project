@@ -4,11 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.taskly.taskly_backend.comment.Comment;
+import org.taskly.taskly_backend.comment.CommentRepository;
 import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
 import org.taskly.taskly_backend.project.Project;
 import org.taskly.taskly_backend.project.ProjectRepository;
 import org.taskly.taskly_backend.role.Role;
 import org.taskly.taskly_backend.role.RoleRepository;
+import org.taskly.taskly_backend.task.Task;
+import org.taskly.taskly_backend.task.TaskRepository;
+import org.taskly.taskly_backend.task.TaskStatus;
 import org.taskly.taskly_backend.user.User;
 import org.taskly.taskly_backend.user.UserRepository;
 
@@ -28,6 +33,8 @@ public class DataStarter implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
+    private final CommentRepository commentRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -354,8 +361,181 @@ public class DataStarter implements CommandLineRunner {
                     .createdBy("silva@gmail.com")
                     .build();
 
-
             projectRepository.save(project5);
+        }
+
+        if(taskRepository.findAll().isEmpty()) {
+            var task1 = Task.builder()
+                    .title("Design Wireframes")
+                    .description("Design wireframes for the new website.")
+                    .deadline(LocalDate.parse("2025-02-15"))
+                    .status(TaskStatus.IN_PROGRESS)
+                    .project(projectRepository.findByName("Website Redesign")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Project with name: Website Redesign not found!")))
+                    .taskMembers(List.of(
+                            userRepository.findByEmail("silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: silva@gmail.com not found!")),
+                            userRepository.findByEmail("gomes@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: gomes@gmail.com not found!")),
+                            userRepository.findByEmail("faria@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: faria@gmail.com not found!")),
+                            userRepository.findByEmail("rodrigues@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: rodrigues@gmail.com not found!")),
+                            userRepository.findByEmail("ana.silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: ana.silva@gmail.com not found!"))))
+                    .createdBy("silva@gmail.com")
+                    .build();
+
+            taskRepository.save(task1);
+
+            var task2 = Task.builder()
+                    .title("Design Landing Page")
+                    .description("Create a responsive landing page for the new product.")
+                    .deadline(LocalDate.parse("2025-03-03"))
+                    .status(TaskStatus.IN_PROGRESS)
+                    .project(projectRepository.findByName("Website Redesign")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Project with name: Website Redesign not found!")))
+                    .taskMembers(List.of(
+                            userRepository.findByEmail("gomes@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: gomes@gmail.com not found!")),
+                            userRepository.findByEmail("ana.silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: ana.silva@gmail.com not found!"))))
+                    .createdBy("silva@gmail.com")
+                    .build();
+
+            taskRepository.save(task2);
+
+            var task3 = Task.builder()
+                    .title("Develop API Endpoints")
+                    .description("Implement the necessary API endpoints for user authentication and data retrieval.")
+                    .deadline(LocalDate.parse("2025-03-15"))
+                    .status(TaskStatus.IN_PROGRESS)
+                    .project(projectRepository.findByName("Website Redesign")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Project with name: Website Redesign not found!")))
+                    .taskMembers(List.of(
+                            userRepository.findByEmail("gomes@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: gomes@gmail.com not found!")),
+                            userRepository.findByEmail("ana.silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: ana.silva@gmail.com not found!"))))
+                    .createdBy("gomes@gmail.com")
+                    .build();
+
+            taskRepository.save(task3);
+
+            var task4 = Task.builder()
+                    .title("Create Marketing Strategy")
+                    .description("Develop a comprehensive marketing plan for the product launch.")
+                    .deadline(LocalDate.parse("2025-02-01"))
+                    .status(TaskStatus.IN_PROGRESS)
+                    .project(projectRepository.findByName("Website Redesign")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Project with name: Website Redesign not found!")))
+                    .taskMembers(List.of(
+                            userRepository.findByEmail("ana.silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: ana.silva@gmail.com not found!")),
+                            userRepository.findByEmail("silva@gmail.com")
+                                    .orElseThrow(() -> new ResourceNotFoundException(
+                                            "User with email: silva@gmail.com not found!"))))
+                    .createdBy("ana.silva@gmail.com")
+                    .build();
+
+            taskRepository.save(task4);
+
+        }
+
+        if(commentRepository.findAll().isEmpty()) {
+            var comment1 = Comment.builder()
+                    .text("Let´s go team!")
+                    .task(taskRepository.findByTitle("Design Wireframes")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Website Redesign not found!")))
+                    .createdBy("silva@gmail.com")
+                    .build();
+
+            commentRepository.save(comment1);
+
+            var comment2 = Comment.builder()
+                    .text("Great progress so far, keep it up!")
+                    .task(taskRepository.findByTitle("Design Wireframes")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Wireframes not found!")))
+                    .createdBy("rodrigues@gmail.com")
+                    .build();
+
+            commentRepository.save(comment2);
+
+            var comment3 = Comment.builder()
+                    .text("Don’t forget to review the color scheme.")
+                    .task(taskRepository.findByTitle("Design Wireframes")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Wireframes not found!")))
+                    .createdBy("faria@gmail.com")
+                    .build();
+
+            commentRepository.save(comment3);
+
+            var comment4 = Comment.builder()
+                    .text("What’s the deadline for the first draft?")
+                    .task(taskRepository.findByTitle("Design Wireframes")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Wireframes not found!")))
+                    .createdBy("ana.silva@gmail.com")
+                    .build();
+
+            commentRepository.save(comment4);
+
+            var comment5 = Comment.builder()
+                    .text("What have you done André?")
+                    .task(taskRepository.findByTitle("Design Landing Page")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Landing Page not found!")))
+                    .createdBy("ana.silva@gmail.com")
+                    .build();
+
+            commentRepository.save(comment5);
+
+            var comment6 = Comment.builder()
+                    .text("I´m going to start now!")
+                    .task(taskRepository.findByTitle("Design Landing Page")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Landing Page not found!")))
+                    .createdBy("gomes@gmail.com")
+                    .build();
+
+            commentRepository.save(comment6);
+
+            var comment7 = Comment.builder()
+                    .text("Already finished everything!")
+                    .task(taskRepository.findByTitle("Design Landing Page")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Landing Page not found!")))
+                    .createdBy("gomes@gmail.com")
+                    .build();
+
+            commentRepository.save(comment7);
+
+            var comment8 = Comment.builder()
+                    .text("Nice, I will review it!")
+                    .task(taskRepository.findByTitle("Design Landing Page")
+                            .orElseThrow(() -> new ResourceNotFoundException(
+                                    "Task with title: Design Landing Page not found!")))
+                    .createdBy("ana.silva@gmail.com")
+                    .build();
+
+            commentRepository.save(comment8);
         }
     }
 }

@@ -12,7 +12,6 @@
           :placeholder="firstname || 'Enter your first name'"
         />
       </div>
-
       <div class="form-group">
         <label for="lastname">Last Name</label>
         <input
@@ -23,7 +22,6 @@
           :placeholder="lastname || 'Enter your last name'"
         />
       </div>
-
       <div class="form-group">
         <label for="jobRole">Job Role</label>
         <input
@@ -34,7 +32,6 @@
           :placeholder="jobRole || 'Enter your job role'"
         />
       </div>
-
       <div class="form-group">
         <label for="dateOfBirth">Date of Birth</label>
         <input
@@ -45,7 +42,6 @@
           :placeholder="dateOfBirth || 'Enter your date of birth'"
         />
       </div>
-
       <div class="form-group">
         <label for="photoUrl">Photo</label>
         <input type="file" id="photoUrl" @change="handleFileChange" />
@@ -58,7 +54,6 @@
           />
         </div>
       </div>
-
       <button type="submit" class="btn-save">Save Changes</button>
     </form>
   </div>
@@ -86,18 +81,15 @@ export default {
     async fetchProfile() {
       try {
         const token = localStorage.getItem("auth_token");
-
         if (!token) {
           alert("You must be logged in to view your profile.");
           this.$router.push("/login");
         }
-
         const response = await axios.get("/api/v1/users/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
         const { firstname, lastname, jobRole, email, photoUrl, dateOfBirth } =
           response.data.data;
         this.firstname = firstname;
@@ -119,9 +111,7 @@ export default {
       formData.append("email", this.email);
       formData.append("dateOfBirth", this.dateOfBirth);
       formData.append("photoUrl", this.photoUrl);
-
       const token = localStorage.getItem("auth_token");
-
       try {
         const response = await axios.put("/api/v1/users/user", formData, {
           headers: {
@@ -145,7 +135,6 @@ export default {
       if (file) {
         this.photoUrl = file;
         const reader = new FileReader();
-
         reader.onload = () => {
           this.photoPreview = reader.result;
         };

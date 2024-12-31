@@ -1,4 +1,9 @@
 package org.taskly.taskly_backend.comment;
 
-public class CommentResponse {
+public record CommentResponse(
+        Long id,
+        String text,
+        Long taskId,
+        String fullName
+) {
 }

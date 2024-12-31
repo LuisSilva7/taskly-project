@@ -7,7 +7,6 @@
         <h3>Total Projects</h3>
         <p>{{ stats.totalProjects }}</p>
       </div>
-
       <div class="stat">
         <i class="icon fas fa-check-circle"></i>
         <h3>Completed Tasks</h3>
@@ -20,7 +19,6 @@
         </div>
         <small>{{ progressCompleted }}% completed</small>
       </div>
-
       <div class="stat">
         <i class="icon fas fa-tasks"></i>
         <h3>Pending Tasks</h3>
@@ -33,7 +31,6 @@
         </div>
         <small>{{ progressPending }}% pending</small>
       </div>
-
       <div class="stat">
         <i class="icon fas fa-exclamation-circle"></i>
         <h3>Overdue Tasks</h3>
@@ -46,13 +43,11 @@
         </div>
         <small>{{ progressOverdue }}% overdue</small>
       </div>
-
       <div class="stat">
         <i class="icon fas fa-check-square"></i>
         <h3>Completed Projects</h3>
         <p>{{ stats.completedProjects }}</p>
       </div>
-
       <div class="stat">
         <i class="icon fas fa-clock"></i>
         <h3>Average Task Duration</h3>

@@ -34,12 +34,15 @@ public class Task extends BaseEntity {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    @ManyToMany(mappedBy = "userTasks")
+    @ManyToMany
+    @JoinTable(
+            name = "user_tasks",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> taskMembers;
 
-    @OneToMany(mappedBy = "task")
-    private List<Comment> taskComments;
 
-    //@OneToMany(mappedBy = "task")
-    //private List<Notification> notifications;  // Lista de notificações associadas à tarefa
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> taskComments;
 }

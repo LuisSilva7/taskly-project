@@ -50,7 +50,6 @@
         Create New Project
       </button>
     </section>
-
     <section class="projects-container">
       <div class="projects-list">
         <ul>
@@ -73,14 +72,12 @@
               </p>
               <p class="project-category">Category: {{ project.category }}</p>
             </div>
-
             <div class="progress-bar">
               <div
                 class="progress"
                 :style="{ width: project.progress + '%' }"
               ></div>
             </div>
-
             <div class="project-actions">
               <span class="progress-text"
                 >{{ project.progress }}% completed</span
@@ -92,7 +89,6 @@
           </li>
         </ul>
       </div>
-
       <div class="pagination">
         <button
           v-if="!pageInfo.first"
@@ -152,7 +148,6 @@ export default {
             },
           }
         );
-
         const data = response.data.data;
         this.projects = data.content;
         this.pageInfo = {
@@ -163,7 +158,6 @@ export default {
           first: data.first,
           last: data.last,
         };
-
         this.applyFilters();
       } catch (error) {
         console.error("Error fetching projects:", error);
