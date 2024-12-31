@@ -7,6 +7,7 @@ import Projects from "../views/Projects.vue";
 import CreateProject from "../views/CreateProject.vue";
 import Project from "../views/Project.vue";
 import Tasks from "../views/Tasks.vue";
+import CreateTask from "../views/CreateTask.vue";
 import Chat from "../views/Chat.vue";
 import Profile from "../views/Profile.vue";
 
@@ -46,6 +47,7 @@ const routes = [
     path: "/createProject",
     name: "CreateProject",
     component: CreateProject,
+    props: true,
     meta: {
       requiresAuth: true,
     },
@@ -54,6 +56,7 @@ const routes = [
     path: "/project/:projectId",
     name: "Project",
     component: Project,
+    props: true,
     meta: {
       requiresAuth: true,
     },
@@ -62,6 +65,15 @@ const routes = [
     path: "/tasks",
     name: "Tasks",
     component: Tasks,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/createTask/:projectId",
+    name: "CreateTask",
+    component: CreateTask,
+    props: true,
     meta: {
       requiresAuth: true,
     },

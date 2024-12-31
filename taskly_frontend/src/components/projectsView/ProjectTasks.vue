@@ -121,7 +121,7 @@ export default {
     },
 
     addNewTask() {
-      this.$router.push(`/addTask/${this.projectId}`);
+      this.$router.push(`/createTask/${this.projectId}`);
     },
 
     async taskMembersNames(members) {
