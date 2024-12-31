@@ -1,4 +1,4 @@
-<template>Reports</template>
+<template>Chat</template>
 
 <script>
 export default {};

@@ -36,6 +36,11 @@
             Tasks
           </router-link>
         </li>
+        <li>
+          <router-link to="/chat" class="nav-link" active-class="active-link">
+            Chat
+          </router-link>
+        </li>
         <li class="profile" @click="toggleProfileMenu">
           <img
             class="profile-photo"

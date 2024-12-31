@@ -1,8 +1,8 @@
 <template>
-  <div class="reports-container">
+  <div class="chat-container">
     <Navbar />
-    <main class="reports">
-      <Reports />
+    <main class="chat">
+      <Chat />
     </main>
     <Footer />
   </div>
@@ -11,25 +11,25 @@
 <script>
 import Navbar from "../components/shared/Navbar.vue";
 import Footer from "../components/shared/Footer.vue";
-import Reports from "../components/reportsView/Reports.vue";
+import Chat from "../components/chatView/Chat.vue";
 
 export default {
   components: {
     Navbar,
     Footer,
-    Reports,
+    Chat,
   },
 };
 </script>
 
 <style scoped>
-.reports-container {
+.chat-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.reports {
+.chat {
   flex: 1;
 }
 </style>
