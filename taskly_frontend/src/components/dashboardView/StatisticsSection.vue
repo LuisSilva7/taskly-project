@@ -28,7 +28,7 @@
       </div>
       <div class="stat" v-if="stats.completedTasks > 0">
         <i class="icon fas fa-clock"></i>
-        <h3>Average Task Completion Time p/ Task</h3>
+        <h3>Average Task Completion Time</h3>
         <p>{{ averageCompletionTime }} days</p>
       </div>
       <div class="stat" v-if="stats.completedTasks > 0">
