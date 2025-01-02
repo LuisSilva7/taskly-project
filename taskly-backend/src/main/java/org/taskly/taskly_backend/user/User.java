@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.taskly.taskly_backend.message.Message;
 import org.taskly.taskly_backend.project.Project;
 import org.taskly.taskly_backend.role.Role;
 import org.taskly.taskly_backend.task.Task;
@@ -61,7 +62,8 @@ public class User implements UserDetails, Principal {
     @ManyToMany(mappedBy = "taskMembers")
     private List<Task> userTasks;
 
-    //relacao com mensagens
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages;
 
     @Override
     public String getName() {
