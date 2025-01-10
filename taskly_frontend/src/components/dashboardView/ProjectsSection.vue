@@ -107,7 +107,7 @@ export default {
 
 h2 {
   font-size: 2rem;
-  color: #2c3e50;
+  color: #094067;
   text-align: center;
 }
 
@@ -151,7 +151,7 @@ ul {
 .project-name {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #094067;
 }
 
 .project-priority {
@@ -164,20 +164,20 @@ ul {
 }
 
 .project-priority.Low {
-  background-color: #06d6a0;
+  background: linear-gradient(90deg, #06d6a0, #02b882);
 }
 
 .project-priority.Medium {
-  background-color: #ffd166;
+  background: linear-gradient(90deg, #ffd166, #ffa500);
 }
 
 .project-priority.High {
-  background-color: #ef476f;
+  background: linear-gradient(90deg, #ef476f, #d32f2f);
 }
 
 .project-description {
   font-size: 1rem;
-  color: #7f8c8d;
+  color: #5d6d7e;
   margin-top: 10px;
 }
 
@@ -189,7 +189,7 @@ ul {
 
 .project-category {
   font-size: 1rem;
-  color: #2c3e50;
+  color: #094067;
   font-weight: 500;
   margin-top: 10px;
 }
@@ -204,7 +204,7 @@ ul {
 
 .progress {
   height: 100%;
-  background: #3498db;
+  background: linear-gradient(90deg, #3498db, #1565c0);
   border-radius: 5px;
   transition: width 0.3s ease;
 }
@@ -219,23 +219,25 @@ ul {
 .progress-text {
   font-size: 1rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #094067;
   margin-bottom: 10px;
 }
 
 .view-btn {
   padding: 12px 25px;
-  background-color: #3498db;
+  background: linear-gradient(90deg, #094067, #1565c0);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .view-btn:hover {
-  background-color: #2c3e50;
+  background: linear-gradient(90deg, #1565c0, #094067);
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 </style>

@@ -144,7 +144,7 @@ export default {
 
 .task-description {
   font-size: 0.9rem;
-  color: #555;
+  color: #5d6d7e;
   margin-top: 5px;
 }
 
@@ -165,17 +165,17 @@ export default {
 }
 
 .task-priority.high {
-  background-color: #ef476f;
+  background: linear-gradient(90deg, #ef476f, #d32f2f);
   color: white;
 }
 
 .task-priority.medium {
-  background-color: #ffd166;
+  background: linear-gradient(90deg, #ffd166, #ffa500);
   color: white;
 }
 
 .task-priority.low {
-  background-color: #06d6a0;
+  background: linear-gradient(90deg, #06d6a0, #02b882);
   color: white;
 }
 
@@ -193,7 +193,7 @@ export default {
 
 .complete-btn {
   padding: 8px 12px;
-  background-color: #3da9fc;
+  background: linear-gradient(90deg, #3da9fc, #094067);
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -203,7 +203,7 @@ export default {
 }
 
 .complete-btn:hover {
-  background-color: #094067;
+  background: linear-gradient(90deg, #094067, #3da9fc);
   transform: scale(1.05);
 }
 </style>

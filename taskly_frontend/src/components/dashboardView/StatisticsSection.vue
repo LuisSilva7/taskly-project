@@ -176,12 +176,12 @@ export default {
 .stat p {
   font-size: 2rem;
   font-weight: bold;
-  color: #3da9fc;
+  color: #1565c0;
 }
 
 .icon {
   font-size: 3rem;
-  color: #3da9fc;
+  color: #1565c0;
   margin-bottom: 10px;
 }
 
@@ -201,15 +201,15 @@ export default {
 }
 
 .progress.completed {
-  background-color: #3da9fc;
+  background: linear-gradient(90deg, #3da9fc, #1565c0);
 }
 
 .progress.messages {
-  background-color: #55c57a;
+  background: linear-gradient(90deg, #55c57a, #2aa655);
 }
 
 small {
   font-size: 0.9rem;
-  color: #777;
+  color: #555;
 }
 </style>
