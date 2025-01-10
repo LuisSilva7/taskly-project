@@ -204,8 +204,8 @@ export default {
 <style scoped>
 .projects-page {
   padding: 50px 30px;
-  padding-top: 50px;
-  padding-bottom: 10px;
+  background-color: #f5faff;
+  border-radius: 12px;
 }
 
 .page-title {
@@ -231,23 +231,25 @@ export default {
 .filter-select {
   padding: 10px 15px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #d1e3f3;
   border-radius: 6px;
+  background-color: #ffffff;
 }
 
 .create-btn {
   padding: 12px 25px;
-  background-color: #094067;
+  background: linear-gradient(90deg, #094067, #1565c0);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .create-btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .projects-container {
@@ -265,7 +267,7 @@ export default {
 
 .project-item {
   background: #ffffff;
-  border: 1px solid #dbe2e8;
+  border: 1px solid #d1e3f3;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -288,7 +290,7 @@ export default {
 .project-name {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #094067;
 }
 
 .project-priority {
@@ -301,20 +303,20 @@ export default {
 }
 
 .project-priority.Low {
-  background-color: #06d6a0;
+  background: linear-gradient(90deg, #06d6a0, #02b882);
 }
 
 .project-priority.Medium {
-  background-color: #ffd166;
+  background: linear-gradient(90deg, #ffd166, #ffa500);
 }
 
 .project-priority.High {
-  background-color: #ef476f;
+  background: linear-gradient(90deg, #ef476f, #d32f2f);
 }
 
 .project-description {
   font-size: 1rem;
-  color: #7f8c8d;
+  color: #5d6d7e;
   margin-top: 10px;
 }
 
@@ -326,7 +328,7 @@ export default {
 
 .project-category {
   font-size: 1rem;
-  color: #2c3e50;
+  color: #094067;
   font-weight: 500;
   margin-top: 10px;
 }
@@ -334,14 +336,14 @@ export default {
 .progress-bar {
   margin-top: 20px;
   height: 10px;
-  background: #ecf0f1;
+  background-color: #eef3f8;
   border-radius: 5px;
   position: relative;
 }
 
 .progress {
   height: 100%;
-  background: #3498db;
+  background: linear-gradient(90deg, #3da9fc, #1565c0);
   border-radius: 5px;
   transition: width 0.3s ease;
 }
@@ -356,24 +358,25 @@ export default {
 .progress-text {
   font-size: 1rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #094067;
   margin-bottom: 10px;
 }
 
 .view-btn {
   padding: 12px 25px;
-  background-color: #3498db;
+  background: linear-gradient(90deg, #094067, #1565c0);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
 }
 
 .view-btn:hover {
-  background-color: #2c3e50;
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .pagination {
@@ -388,10 +391,10 @@ export default {
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
-  background-color: #3498db;
+  background: linear-gradient(90deg, #3da9fc, #1565c0);
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .pagination button:disabled {
@@ -401,6 +404,6 @@ export default {
 
 .pagination span {
   font-size: 1.2rem;
-  color: #2c3e50;
+  color: #094067;
 }
 </style>
