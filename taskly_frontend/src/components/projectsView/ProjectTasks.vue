@@ -169,93 +169,122 @@ export default {
 
 <style scoped>
 .project-tasks {
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  padding: 30px;
+  border-radius: 12px;
 }
 
 .task-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .task-header h2 {
-  margin-top: 0;
+  margin: 0;
   color: #2c3e50;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .task-header .add-task-button {
-  padding: 10px 20px;
-  background-color: #094067;
+  padding: 12px 25px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .task-header .add-task-button:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .task-header .add-task-button:disabled {
-  background-color: #95a5a6;
+  background-color: #b0bec5;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .task-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
 .task-item {
-  background-color: white;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dbe4ea;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.task-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .task-item h3 {
-  margin-top: 0;
-  color: #3498db;
+  margin: 0 0 15px 0;
+  color: #455a64;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .task-item p {
-  color: #34495e;
   font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.task-item p strong {
+  color: #1e88e5;
 }
 
 .add-comment {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
 .add-comment input {
-  padding: 10px;
+  padding: 12px;
   width: 100%;
   font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid #ccd5e1;
+  transition: border-color 0.3s ease;
+}
+
+.add-comment input:focus {
+  outline: none;
+  border-color: #1e88e5;
 }
 
 .add-comment button {
   padding: 10px 20px;
-  background-color: #3498db;
+  background: linear-gradient(90deg, #1e88e5, #1565c0);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.add-comment button:hover {
+  background: linear-gradient(90deg, #1565c0, #1e88e5);
+  transform: scale(1.05);
 }
 
 .add-comment button:disabled {
-  background-color: #95a5a6;
+  background-color: #b0bec5;
   cursor: not-allowed;
 }
 
@@ -264,22 +293,26 @@ export default {
 }
 
 .task-comments h4 {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .comment-item {
-  background-color: #ecf0f1;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #f7f9fc;
 }
 
 .comment-text {
   font-size: 1rem;
   margin: 0;
+  color: #546e7a;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -287,7 +320,7 @@ export default {
 
 .comment-user {
   font-size: 0.9rem;
-  color: #7f8c8d;
+  color: #78909c;
   margin-left: 10px;
   white-space: nowrap;
   text-align: right;
@@ -300,6 +333,7 @@ export default {
 
 .no-tasks p {
   font-size: 1.2rem;
-  color: #7f8c8d;
+  color: #78909c;
+  text-align: center;
 }
 </style>
