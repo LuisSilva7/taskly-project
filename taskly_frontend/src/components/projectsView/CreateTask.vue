@@ -132,95 +132,131 @@ export default {
 
 <style scoped>
 .create-task {
-  padding: 30px;
+  padding: 40px;
   border-radius: 12px;
-  margin-bottom: 30px;
-  background-color: #f9f9f9;
-  width: 60%;
-  margin: 0 auto;
+  background-color: #f5faff; /* Fundo azul claro */
+  width: 70%;
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-  font-size: 2rem;
-  color: #333;
+  font-size: 2.5rem;
+  color: #2c3e50;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 label {
   font-size: 1rem;
-  color: #333;
+  color: #34495e;
   font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  padding: 12px;
+  padding: 15px;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid #ccd5e1;
+  border-radius: 8px;
   margin-top: 5px;
-  background-color: #fff;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
 }
 
 textarea {
-  height: 100px;
+  height: 120px;
+  resize: none;
 }
 
 button.submit-btn {
-  padding: 12px 25px;
-  background-color: #2980b9;
+  padding: 15px 30px;
+  background: linear-gradient(90deg, #2980b9, #1c5e88);
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 1.2rem;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 20px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0;
 }
 
 button.submit-btn:hover {
-  background-color: #1c5e88;
   transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .user-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f5f5f5;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #ccd5e1;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-item:hover {
+  background-color: #f0f4f8;
 }
 
 .user-item.selected {
-  background-color: #2980b9;
+  background-color: #1e88e5;
   color: white;
+  border: none;
 }
 
 button[type="button"] {
-  margin-left: 10px;
-  padding: 6px 12px;
-  background-color: #2980b9;
+  padding: 8px 16px;
+  background-color: #1e88e5;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button[type="button"]:hover {
-  background-color: #1c5e88;
+  background-color: #1565c0;
+  transform: scale(1.05);
 }
 
 button[type="button"].selected {
-  background-color: #1c5e88;
+  background-color: #1565c0;
+}
+
+@media (max-width: 768px) {
+  .create-task {
+    width: 90%;
+    padding: 20px;
+  }
+
+  button.submit-btn {
+    max-width: 100%;
+  }
 }
 </style>
