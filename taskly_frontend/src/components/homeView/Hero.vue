@@ -63,30 +63,36 @@ export default {
 }
 
 .btn-primary {
-  background-color: #094067;
+  background: linear-gradient(90deg, #094067, #051933);
   color: #fff;
   padding: 15px 25px;
   font-size: 1.2rem;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #051933;
+  background: linear-gradient(90deg, #051933, #094067);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
-  background-color: transparent;
+  background: transparent;
   color: #094067;
   padding: 15px 25px;
   font-size: 1.2rem;
   border: 2px solid #094067;
   border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: #bcd9f5;
+  background: #dbe4f0;
+  color: #051933;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

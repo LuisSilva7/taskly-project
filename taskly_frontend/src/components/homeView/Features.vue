@@ -27,7 +27,7 @@ export default {};
 
 .features h2 {
   font-size: 2rem;
-  color: #2d3a4e;
+  color: #094067;
   margin-bottom: 20px;
 }
 
@@ -43,25 +43,26 @@ export default {};
 
 .features li {
   font-size: 1.2rem;
-  color: #3a4a62;
+  color: #094067;
   display: flex;
   align-items: center;
-  background: #f4f8fb;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f5faff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: calc(50% - 10px);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .features li:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .features li::before {
   content: "✔";
   margin-right: 12px;
-  color: #3a5f77;
+  color: #1565c0;
   font-weight: bold;
   font-size: 1.4rem;
 }
