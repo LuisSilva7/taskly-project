@@ -160,7 +160,6 @@ export default {
 <style scoped>
 .project-info {
   padding: 40px 20px;
-  border-radius: 8px;
 }
 
 .project-header {
@@ -173,55 +172,75 @@ export default {
 .project-info h2 {
   margin-top: 0;
   color: #2c3e50;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: bold;
   flex-grow: 1;
+  text-transform: capitalize;
 }
 
 .project-actions {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
 .project-details p {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  color: #34495e;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #5d6d7e;
 }
 
 .project-details p strong {
-  color: #2980b9;
+  color: #1e88e5;
 }
 
 .project-actions button {
-  padding: 12px 25px;
-  background-color: #3498db;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #6c5ce7, #4e44e2);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
   font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .project-actions button:hover {
-  background-color: #2980b9;
-  transform: scale(1.05);
+  background: linear-gradient(90deg, #4e44e2, #6c5ce7);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .project-actions button:disabled {
-  background-color: #95a5a6;
+  background-color: #bdc3c7;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .project-actions button:disabled:hover {
-  background-color: #95a5a6;
+  transform: none;
 }
 
 .project-actions .delete-btn {
-  background-color: #e74c3c;
+  background: linear-gradient(90deg, #ff6b6b, #e74c3c);
 }
 
 .project-actions .delete-btn:hover {
-  background-color: #c0392b;
+  background: linear-gradient(90deg, #e74c3c, #ff6b6b);
+}
+
+.project-details {
+  margin-top: 20px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-details p:not(:last-child) {
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
 }
 </style>
