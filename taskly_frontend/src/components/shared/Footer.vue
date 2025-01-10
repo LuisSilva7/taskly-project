@@ -10,9 +10,17 @@ export default {};
 
 <style scoped>
 footer {
-  background-color: #35495e;
+  background: linear-gradient(135deg, #2d3e50, #35495e);
   color: white;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
+  font-size: 1rem;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
 }
 </style>
