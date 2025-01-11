@@ -1,5 +1,7 @@
 package org.taskly.taskly_backend.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.taskly.taskly_backend.common.ApiResponse;
 import org.taskly.taskly_backend.exception.custom.ResourceAlreadyExistsException;
 import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
@@ -17,6 +19,8 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<?>> handleException(ResourceNotFoundException exp) {
@@ -63,6 +67,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> handleException(Exception exp) {
+        logger.error("Unexpected error: {}", exp.getMessage(), exp);
+
         ApiResponse<?> apiResponse = new ApiResponse<>(
                 exp.getMessage(), null);
 
