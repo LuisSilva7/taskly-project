@@ -12,10 +12,8 @@ import org.taskly.taskly_backend.exception.custom.ResourceAlreadyExistsException
 import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
 import org.taskly.taskly_backend.project.Project;
 import org.taskly.taskly_backend.project.ProjectRepository;
-import org.taskly.taskly_backend.project.enums.ProjectStatus;
 import org.taskly.taskly_backend.user.User;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

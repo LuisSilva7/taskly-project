@@ -1,0 +1,48 @@
+services:
+  mysql:
+    container_name: postgresql_taskly
+    image: postgres:13
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: taskly_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - taskly-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  taskly-api:
+    container_name: taskly-api
+    image: taskly-backend-project
+    ports:
+      - 8888:8888
+    networks:
+      - taskly-net
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  taskly-ui:
+    container_name: taskly-ui
+    image: taskly-frontend-project
+    ports:
+      - 8080:80
+    networks:
+      - taskly-net
+    depends_on:
+      - taskly-api
+
+networks:
+  taskly-net:
+    driver: bridge
+
+volumes:
+  postgres_data:

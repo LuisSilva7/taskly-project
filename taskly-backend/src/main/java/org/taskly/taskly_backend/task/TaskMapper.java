@@ -3,7 +3,6 @@ package org.taskly.taskly_backend.task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.taskly.taskly_backend.comment.Comment;
-import org.taskly.taskly_backend.comment.CommentRepository;
 import org.taskly.taskly_backend.comment.CommentResponse;
 import org.taskly.taskly_backend.exception.custom.ResourceNotFoundException;
 import org.taskly.taskly_backend.project.Project;
@@ -20,7 +19,6 @@ public class TaskMapper {
 
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
-    private final CommentRepository commentRepository;
 
     public Task toTaskEntity(TaskRequest request, Long projectId) {
         Optional<Project> project = projectRepository.findById(projectId);
