@@ -49,7 +49,7 @@ Taskly is a platform designed to streamline project management and team communic
    cd taskly-project/taskly-backend
    ```
 
-3. **Run MySQL container:**
+3. **Run PostgreSQL container:**
 
    ```bash
    docker compose up -d

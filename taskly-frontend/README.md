@@ -1,5 +1,34 @@
-# Vue 3 + Vite
+# Frontend
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## How to Run the Project Locally
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+### Installation Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/LuisSilva7/taskly-project.git
+   ```
+
+2. Navigate to the project frontend directory:
+
+   ```bash
+   cd taskly-project/taskly-frontend
+   ```
+
+3. Install project dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Clear the LocalStorage:**
+   Clear your LocalStorage to make sure everything is working.
+
+The application will be available at [http://localhost:5000](http://localhost:5000) in your browser.
