@@ -127,19 +127,19 @@ The application will be available at [http://localhost:8080](http://localhost:80
 
 ### Home Page
 
-![Home Page](screenshots/home.jpg)
+![Home Page](screenshots/home.png)
 
 ### Login Page
 
-![Home Page](screenshots/login.jpg)
+![Home Page](screenshots/login.png)
 
 ### Dashboard Page
 
-![Dashboard Page](screenshots/dashboard.jpg)
+![Dashboard Page](screenshots/dashboard.png)
 
 ### Projects Page
 
-![Projects Page](screenshots/projects.jpg)
+![Projects Page](screenshots/projects.png)
 
 ### Maintainer
 
