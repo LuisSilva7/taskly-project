@@ -16,6 +16,7 @@ Taskly is a platform designed to streamline project management and team communic
 ## Technologies Used
 
 - **Frontend**:
+
   - **VueJS** - JavaScript framework for building user interfaces.
   - **HTML** - Structure of the web application.
   - **CSS** - For styling the website.
@@ -116,7 +117,7 @@ If you prefer to run the application inside a Docker container, follow these ste
    ```bash
    docker compose -f ../docker-taskly/docker-compose.yml up -d
    ```
-   
+
 6. **Clear the LocalStorage:**
    Clear your LocalStorage to make sure everything is working.
 
@@ -128,9 +129,17 @@ The application will be available at [http://localhost:8080](http://localhost:80
 
 ![Home Page](screenshots/home.jpg)
 
-### Home Page
+### Login Page
 
-![Home Page](screenshots/home.jpg)
+![Home Page](screenshots/login.jpg)
+
+### Dashboard Page
+
+![Dashboard Page](screenshots/dashboard.jpg)
+
+### Projects Page
+
+![Projects Page](screenshots/projects.jpg)
 
 ### Maintainer
 
